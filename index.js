@@ -17,6 +17,16 @@ app.get("/", (req, res) => {
 });
 
 app.post("/", (req, res) => {
+  // Get access to email, password and passwordConfirmation from the request body
+  req.on("data", (data) => {
+    const parsed = data.toString("utf8").split("&");
+    const formData = {};
+    for (const pair of parsed) {
+      const [key, value] = pair.split("=");
+      formData[key] = value;
+    }
+    console.log(formData);
+  });
   res.send("Account Created");
 });
 
